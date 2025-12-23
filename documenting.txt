@@ -1,0 +1,59 @@
+Angular + NestJS Full Stack Crash Course - Build an E-commerce Store (Part 1/3)
+
+https://www.youtube.com/watch?v=E1wtzB0ZSgQ
+
+    1. Installing npx           
+        npm add --global nx
+
+    2. Creating a workSpace
+            npx create-nx-workspace@latest
+
+    3. Creating a nest project
+        a. Installing nx add @nx/nest
+            nx add @nx/nest
+
+        b. Creating new application (replace "my-nest-app" by your apploication name)
+            nx g @nx/nest:app apps/my-nest-app
+
+    4. Run nest server    (14:20)
+            a. installing package
+            npm install -g nx
+            b. to run server: npx nx serve pet-markt-be
+    
+    5. Installing prisma:
+        npm install prisma --save-dev
+        19:33
+    
+    6. Create a free account in neon postgre, create a new project and get the connection link to de database
+        psql 'postgresql://neondb_owner:npg_v9IjDgJEr7Se@ep-royal-moon-a9s9oivo-pooler.gwc.azure.neon.tech/neondb?sslmode=require&channel_binding=require'
+
+    7. Type in the console:
+        change to folder apps/pet-markt-be
+        npx prisma init
+        To configurate prisma, in the folder prisma in the schema.prisma file you should to write the migrations
+
+        npm install @prisma/config dotenv
+        npx prisma migrate dev
+
+    8. Executing seeder.
+       npm install -D typescript tsx @types/node
+       modify your prisma.config.ts file, adding this line seed: "tsx prisma/seed.ts":
+        import 'dotenv/config'
+        import { defineConfig, env } from "prisma/config";
+        export default defineConfig({
+            schema: "prisma/schema.prisma",
+            migrations: {
+                path: "prisma/migrations",
+                seed: "tsx prisma/seed.ts"
+            },
+            datasource: {
+            url: env("DATABASE_URL"),
+            },
+        });
+
+
+
+Run the init command in your app's root directory to connect your app to Neon.
+npx neonctl@latest init
+
+Push your repo, then go to Nx Cloud and finish the setup: https://cloud.nx.app/connect/i36S1x6j38
