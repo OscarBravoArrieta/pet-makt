@@ -24,7 +24,7 @@ https://www.youtube.com/watch?v=E1wtzB0ZSgQ
         npm install prisma --save-dev
         19:33
     
-    6. Create a free account in neon postgre, create a new project and get the connection link to de database
+    6. Create a free account in neon postgre, create a new project and get the connection link to the database
         psql 'postgresql://neondb_owner:npg_v9IjDgJEr7Se@ep-royal-moon-a9s9oivo-pooler.gwc.azure.neon.tech/neondb?sslmode=require&channel_binding=require'
 
     7. Type in the console:
@@ -50,6 +50,29 @@ https://www.youtube.com/watch?v=E1wtzB0ZSgQ
             url: env("DATABASE_URL"),
             },
         });
+    
+    9. Set up GraphQL in the NestJS application
+        npm i @nestjs/graphql @nestjs/apollo @apollo/server @as-integrations/express5 graphql
+        legacy-peer-deps
+
+        in folder pet-markt-be\src\app> nx g resource products/products
+
+        ? Which generator would you like to use? ... 
+        @nestjs/schematics:resource
+        @nx/nest:resource -->(Select this option) 
+
+        
+        ? What transport layer do you use? ... 
+        rest
+        graphql-code-first -->(Select this option)
+        graphql-schema-first
+        microservice
+        ws
+
+        41:40
+    
+    
+
 
 
 
