@@ -89,8 +89,32 @@ https://www.youtube.com/watch?v=E1wtzB0ZSgQ
             nx serve pet-markt-web
     
     11. Adding tailwin.css to the Angular project
-        a. modify tsconfig.base.json, removing
-           "declaration": false,
+        a. modify: 
+           tsconfig.base.json-> removing "declaration": false, or setting "declaration": true,
+
+           In the app angular, update the tsconfig.app.json:
+
+            "types": ["node"],
+            "composite": false,
+            "emitDeclarationOnly": false,
+            "declaration": true,
+            "moduleResolution": "bundler",
+            "module": "esnext",
+            "lib": ["es2022", "dom"]
+
+        b. To remove an application from nx workSpace:  npx nx g @nx/workspace:remove <nombre-de-tu-aplicacion>
+
+    12. Installing and configuration tailwind
+
+        a. npm install tailwindcss @tailwindcss/postcss postcss --force
+        b.  Generate a new component in pet-markt-web/src/app
+            nx g c components/header/header
+        c. Update the extensions configuration of the files (nx.json) an the component.ts. Change css bt scss
+
+    13. installing daisyui:
+         npm install daisyui@latest tailwindcss@latest @tailwindcss/postcss@latest postcss@latest --force
+
+
         a. npx nx g @nx/angular:setup-tailwind pet-markt-web
         b. npm install --save-dev daisyui@4.12.24
         c. Generate a new component in pet-markt-web/src/app
