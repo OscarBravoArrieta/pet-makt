@@ -70,6 +70,33 @@ https://www.youtube.com/watch?v=E1wtzB0ZSgQ
         ws
 
         41:40
+    10 Creating an Angular App in the repo
+        a. installing nx add @nx/angular
+        b. If the instalatiion generates this error: The "@nx/angular" plugin doesn't support the existing TypeScript setup
+           in the tsconfig.base.json file, set "declaration": false,
+        c. To create the angular app, type the next command. appName is the application name
+           nx g @nx/angular:app apps/appName
+
+           the recomendated configuration:
+
+            √ Which stylesheet format would you like to use? · scss                      mand-line\add\add.js:
+            √ Which unit test runner would you like to use? · jest
+            √ Which E2E test runner would you like to use? · playwright                  js:26:15
+            √ Which bundler do you want to use to build the application? · esbuild       tils\handle-errors.js
+            √ Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? (y/N) · true
+
+        d. To run application
+            nx serve pet-markt-web
+    
+    11. Adding tailwin.css to the Angular project
+        a. modify tsconfig.base.json, removing
+           "declaration": false,
+        a. npx nx g @nx/angular:setup-tailwind pet-markt-web
+        b. npm install --save-dev daisyui@4.12.24
+        c. Generate a new component in pet-markt-web/src/app
+            nx g c components/header/header
+        d. Update the extensions configuration of the files (nx.json) (1:00)
+        e. Update the tsconfig.json file (1:20)
     
     
 
