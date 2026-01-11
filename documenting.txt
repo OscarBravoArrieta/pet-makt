@@ -113,14 +113,33 @@ https://www.youtube.com/watch?v=E1wtzB0ZSgQ
 
     13. installing daisyui:
          npm install daisyui@latest tailwindcss@latest @tailwindcss/postcss@latest postcss@latest --force
-
-
-        a. npx nx g @nx/angular:setup-tailwind pet-markt-web
-        b. npm install --save-dev daisyui@4.12.24
-        c. Generate a new component in pet-markt-web/src/app
+        a. Generate a new component in pet-markt-web/src/app
             nx g c components/header/header
-        d. Update the extensions configuration of the files (nx.json) (1:00)
-        e. Update the tsconfig.json file (1:20)
+
+    14. Installing  @ngrx/signals and apollo-angular
+
+        a. npm install @ngrx/signals --save
+        b. npm install apollo-angular
+        
+
+Notes:
+
+To update each dependency in package.json to the latest version?
+
+npm i -g npm-check-updates
+ncu -u
+npm install
+
+-----
+
+To resolve: The error "Missing parameter name at index 2: /**" in a Vite SSR.
+The recommended fix for app.use('/**') is to change it to app.use('/{*path}'), in the server.ts file.
+
+-----
+
+To resolve: 'Access-Control-Allow-Origin' header is present on the requested resource.
+In the main.ts file: pp.enableCors();
+        
     
     
 

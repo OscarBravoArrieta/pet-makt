@@ -1,0 +1,28 @@
+<p>products works!</p>
+
+@if(productStore.loading()){
+  <div>Loading products...</div>
+}
+@else if (productStore.error()){
+  <div>Error loading products: {{ productStore.error() }}</div>
+}
+@else if (productStore.products().length === 0){
+  <div>No products available.</div>
+}
+@else{
+  <ul>
+    @for (product of productStore.products(); track product){
+      <!-- <li>
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p>Price: {{ product.price | currency }}</p>
+      </li> -->
+      <pre>
+        {{ product | json }}
+
+      </pre>
+      
+    }
+  </ul>
+}   
+

@@ -17,5 +17,10 @@
     "jest.config.ts",
     "jest.config.cts",
     "src/test-setup.ts"
+  ],
+  "references": [
+    {
+      "path": "../pet-markt-be/tsconfig.app.json"
+    }
   ]
 }

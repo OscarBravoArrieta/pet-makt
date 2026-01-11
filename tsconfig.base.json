@@ -17,6 +17,9 @@
     "strict": true,
     "target": "es2022",
     "declaration": true,
-    "customConditions": ["@org/source"]
+    "customConditions": ["@org/source"],
+    "paths": {
+      "@client": ["./apps/pet-markt-be/src/generated/client.ts"]
+    }
   }
 }
