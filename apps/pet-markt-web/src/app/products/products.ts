@@ -1,9 +1,13 @@
  import { afterNextRender, Component, inject } from '@angular/core'
+  // eslint-disable-next-line @nx/enforce-module-boundaries
+ import { Product } from '@client'
  import { ProductStore } from '../stores/products.store'
+ import { CartStore } from '../stores/cart.store'
  import { ProductCard } from '../components/product-card/product-card'
  import { FormsModule } from '@angular/forms'
  import { debounceTime, distinctUntilChanged, Subject } from 'rxjs'
  import untilDestroyed from '../utils/untilDestroyed'
+
 
  @Component({
      selector: 'app-products',
@@ -14,6 +18,7 @@
  export class Products {
 
      productStore = inject(ProductStore)
+     cartStore = inject(CartStore)
      searchTerm = ''
      searchSubject = new Subject<string>()
      untilDestroyed = untilDestroyed()
@@ -33,10 +38,12 @@
 
      }
      onSearchChange(term: string) {
+
          this.searchSubject.next(term)
-         //this.searchTerm = term.toLowerCase()
-         //console.log('Search term changed:', term)
+
      }
 
-
-}
+     addToCart(product: Product) {
+         this.cartStore.addToCart(product)
+     }
+ }

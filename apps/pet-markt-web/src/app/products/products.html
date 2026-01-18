@@ -32,7 +32,7 @@
      @else if (productStore.products().length) {
          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
              @for (product of productStore.products(); track product.id){
-                 <app-product-card [product]="product"/>
+                 <app-product-card (addToCart)="cartStore.addToCart($event)" [product]="product"/>
              }
          </div>
      }

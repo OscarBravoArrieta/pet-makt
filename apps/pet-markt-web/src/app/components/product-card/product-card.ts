@@ -1,4 +1,4 @@
- import { Component, input } from '@angular/core';
+ import { Component, input, output } from '@angular/core';
  // eslint-disable-next-line @nx/enforce-module-boundaries
  import { Product } from '@client'
 
@@ -9,5 +9,10 @@
      styleUrl: './product-card.scss',
  })
  export class ProductCard {
-     product = input.required<Product>();
+     product = input.required<Product>()
+     addToCart = output<Product>()
+
+     onAddToCart(product: Product) {
+         this.addToCart.emit(product);
+     }
  }
