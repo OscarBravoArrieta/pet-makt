@@ -3,13 +3,14 @@ import {
   ApplicationConfig,
   inject,
   provideBrowserGlobalErrorListeners,
-  
+
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import {
   provideClientHydration,
   withEventReplay,
+  withIncrementalHydration,
 } from '@angular/platform-browser';
 import { provideApollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
@@ -27,7 +28,7 @@ export const appConfig: ApplicationConfig = {
     }),
 
     provideHttpClient(withFetch()),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withIncrementalHydration()),
     provideBrowserGlobalErrorListeners(),
     provideRouter(appRoutes),
   ],

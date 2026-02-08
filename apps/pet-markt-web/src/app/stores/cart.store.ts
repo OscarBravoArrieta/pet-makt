@@ -2,27 +2,35 @@
  // eslint-disable-next-line @nx/enforce-module-boundaries
  import { Product } from '@client'
 
+ const CART_LOCAL_STORAGE_KEY = 'pet-mart-cart'
+
  type CartItem = Product & {
      quantity: number
  }
 
  type CartState = {
+
      items: CartItem[]
-    //  totalQuantity: number
-    //  totalPrice: number
  }
 
  const initialState: CartState = {
+
      items: [],
-    //  totalQuantity: 0,
-    //  totalPrice: 0,
  }
 
  export const CartStore = signalStore(
      {
         providedIn: 'root',
      },
-     withState(() => initialState),
+     withState(() => {
+         if('localStorage' in globalThis) {
+             return {
+                 ...initialState,
+                 items: JSON.parse(localStorage.getItem(CART_LOCAL_STORAGE_KEY) ?? '[]') as CartItem[],
+             }
+         }
+         return initialState
+     }),
      withComputed((store) => ({
          totalItems: () => store.items().reduce((acc, item) =>{ return acc + item.quantity}, 0),
          totalAmount: () => store.items().reduce((acc, item) => {return acc + (item.price * item.quantity)}, 0),
@@ -45,6 +53,8 @@
                  })
              }
 
+             localStorage.setItem(CART_LOCAL_STORAGE_KEY, JSON.stringify(store.items()))
+
          },
          updateQuantity(productId: number, quantity: number) {
              const updatedItems = store.items().map((item) => (
@@ -52,13 +62,16 @@
              ))
 
              patchState(store, { items: updatedItems })
+             localStorage.setItem(CART_LOCAL_STORAGE_KEY, JSON.stringify(updatedItems))
          },
          removeFormCart(productId: number) {
              const updatedItems = store.items().filter((item) => item.id !== productId)
              patchState(store, { items: updatedItems })
+             localStorage.setItem(CART_LOCAL_STORAGE_KEY, JSON.stringify(updatedItems))
          },
          clearCart() {
              patchState(store, { items: [] })
+             localStorage.removeItem(CART_LOCAL_STORAGE_KEY)
          }
      }))
  )

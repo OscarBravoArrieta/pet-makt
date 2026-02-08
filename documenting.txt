@@ -152,3 +152,70 @@ https://www.youtube.com/watch?v=DSDfH9K6-q0&t=172s
              }
          ]
     4. Making an inputSearch
+
+    5. Install stripe
+        npm install stripe
+        pet-markt-be\src\app>npx nx generate resource checkout/checkout
+
+        √ What transport layer do you use? · rest
+        √ Would you like to generate CRUD entry points? (Y/n) · true
+
+        This action, crate: controller, module, service, create-checkout.dto, update-checkout.dto, checkout.entity
+
+        pet-markt-be\src\app>npx nx generate resource orders/orders
+        √ What transport layer do you use? · graphql-code-first
+        √ Would you like to generate CRUD entry points? (Y/n) · true
+        This action create: orders.module, orders.resolver, order.service, create-order.input, update-order.input, order.entity
+
+        Create a file: order-item.entity
+        Update the create-order-input file
+        In the orders/module file: imports: [PrismaModule],
+
+
+    6. Install:
+        npm install class-transformer class-validator
+        npm install class-validator
+
+        pet-markt/apps/pet-markt-web/src/app npx nx g s services/stripe
+        √ Which generator would you like to use? · @schematics/angular:service
+
+        Create components:
+        pet-markt-web/src/app/checkout npx nx g c checkout-failure/checkout-failure
+        pet-markt-web/src/app/checkout npx nx g c checkout-success/checkout-success
+
+    7. To show the details of the oders:
+       in the app folder, create the folders orders\components
+
+       create components:
+
+       projects\nx\pet-makt\apps\pet-markt-web\src\app\orders\components> npx nx g c order-detail/order-detail
+       √ Which generator would you like to use? · @nx/angular:component
+
+       1:31:20
+
+
+
+
+
+
+    Notes: ----------------------------------------------------------------------------------------
+
+    To update each dependency in package.json to the latest version?
+
+    npm i -g npm-check-updates
+    ncu -u
+    npm install
+
+    -----
+
+    To resolve: The error "Missing parameter name at index 2: /**" in a Vite SSR.
+    The recommended fix for app.use('/**') is to change it to app.use('/{*path}'), in the server.ts file.
+
+    -----
+
+    To resolve: 'Access-Control-Allow-Origin' header is present on the requested resource.
+    In the main.ts file: pp.enableCors();
+
+    To resolve NX Deamon is not runnig... npx nx reset
+    In the app.config file on angular, update: provideClientHydration(withEventReplay(), withIncrementalHydration()),
+
