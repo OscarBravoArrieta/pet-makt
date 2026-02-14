@@ -191,12 +191,80 @@ https://www.youtube.com/watch?v=DSDfH9K6-q0&t=172s
        projects\nx\pet-makt\apps\pet-markt-web\src\app\orders\components> npx nx g c order-detail/order-detail
        √ Which generator would you like to use? · @nx/angular:component
 
-       1:31:20
+       ----------
+
+       Make a sumary from the time 1:31:20 (deploy) to en of the video
+
+       a. In the app.routes.server.ts,
+       replace -> renderMode: RenderMode.Prerender,
+       by -> renderMode: RenderMode.Server,
+
+       b. Create a new branch: git checkout -b checkpoint-1-final
+
+       c. In the app.routes:
+
+       Duplicate and Update the first entire and create a new
+
+       Before:
+        {
+            path: '',
+            pathMatch: 'full',
+            loadComponent: async () => {
+                const mod = await import('./home/home')
+                return mod.Home
+            }
+        },
+
+        After:
+        {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'home'
+        },
+        {
+            path: 'home',
+            loadComponent: async () => {
+                const mod = await import('./home/home')
+                return mod.Home
+            }
+        },
+
+
+        at end of te file:
+
+         {
+             path: '**',
+             redirectTo: 'home'
+         },
+     d. in App anguar and folder App, create
+        - folder environments
+        - file environments/environment.ts
+        - file environments/environment.prod.ts
+
+        Configurate in booth files, the api of the backEnd
+
+     e. In the file project.json (angular)
+        targets -> build -> options -> configurations -> production -> budgets, after outputHashing, add fileReplacements
+        "outputHashing": "all",
+          "fileReplacements": [
+            {
+                "replace": "apps/pet-markt-web/src/app/environments/environment.ts",
+                "with": "apps/pet-markt-web/src/app/environments/environment.prod.ts"
+            }
+        ]
+
+     f. Uptate all files en the frontEnd, replacing
+        localhost:3000
+        with: ${environment.apiUrl}
+
+     g. In the branch (git) checkpoint-1-final, type:
+        D:\projects\nx\pet-makt>npx nx build
+
+     h. in D:\projects\nx\pet-makt\pet-markt-web>make a file: ecosystem.config.js
 
 
 
-
-
+       ---------
 
     Notes: ----------------------------------------------------------------------------------------
 

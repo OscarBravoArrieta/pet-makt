@@ -4,6 +4,10 @@
      {
          path: '',
          pathMatch: 'full',
+         redirectTo: 'home'
+     },
+     {
+         path: 'home',
          loadComponent: async () => {
              const mod = await import('./home/home')
              return mod.Home
@@ -44,6 +48,11 @@
              const mod = await import('./checkout/checkout-success/checkout-success')
              return mod.CheckoutSuccess
          }
+     },
+
+     {
+         path: '**',
+         redirectTo: 'home'
      },
 
 
