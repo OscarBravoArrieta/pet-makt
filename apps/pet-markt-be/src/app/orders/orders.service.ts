@@ -2,7 +2,8 @@
  import { CreateOrderInput } from './dto/create-order.input'
  import { UpdateOrderInput } from './dto/update-order.input'
  import { PrismaService } from '../prisma/prisma.service'
-
+ import { DeleteOrderResp } from './dto/delete-order-resp'
+ import { OrderStatus } from "../../generated/client"
 
  @Injectable()
  export class OrdersService {
@@ -15,7 +16,7 @@
          return this.prisma.order.create({
              data: {
                  totalAmount,
-                 status: 'PENDING',
+                //  status: 'PENDING',
                  items: {
                      create: items.map((item) => ({
                          quantity: item.quantity,
@@ -37,7 +38,15 @@
      }
 
      findAll() {
-         return `This action returns all orders`
+         return this.prisma.order.findMany({
+             include: {
+                 items: {
+                     include: {
+                         product: true,
+                     },
+                 },
+             },
+         })
      }
 
      findOne(id: string) {
@@ -53,11 +62,52 @@
          })
      }
 
-    update(id: number, updateOrderInput: UpdateOrderInput) {
-        return `This action updates a #${id} order`
-    }
+     update(id: string, updateOrderInput: UpdateOrderInput) {
+         return this.prisma.order.update({
+             where: {
+                 id
+             },
+             data: {
+                 ...updateOrderInput,
+             },
+             include: {
+                 items: {
+                     include: {
+                         product: true,
+                     },
+                 },
+             },
+         })
+     }
 
-    remove(id: number) {
-        return `This action removes a #${id} order`
-    }
+     async removeUnpaid(id: string): Promise<DeleteOrderResp> {
+         const order = await this.prisma.order.findUnique({
+             where: { id },
+         })
+
+         if (!order) {
+             return {
+                 success: false,
+                 orderId: id,
+                 //error: 'Order not found',
+             }
+         }
+
+         if(order.status !== OrderStatus.PAYMET_REQUIRED) {
+             await this.prisma.order.delete({
+                 where: { id },
+             })
+             return {
+                 success: true,
+                 orderId: id,
+                 //error: 'Only unpaid orders can be deleted',
+             }
+         }
+
+         return {
+             success: false,
+             orderId: id,
+             error: `Order with id ${id} is not in ${OrderStatus.PAYMET_REQUIRED} status and cannot be deleted`,
+         }
+     }
 }

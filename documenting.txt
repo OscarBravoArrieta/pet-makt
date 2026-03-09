@@ -262,9 +262,47 @@ https://www.youtube.com/watch?v=DSDfH9K6-q0&t=172s
 
      h. in D:\projects\nx\pet-makt\pet-markt-web>make a file: ecosystem.config.js
 
+     i. in D:\projects\nx\pet-makt\pet-markt-be>make a file: ecosystem.config.js
+     ---------
+
+     https://www.youtube.com/watch?v=rlYVelhroDU&t=246s
+
+     1. In postgress Neon, create a child branch, from default branch and update the DATABASE_URL key in the .env file
+     2. D:\projects\nx\pet-makt\apps\pet-markt-be>
+
+        Loaded Prisma config from prisma.config.ts.
+
+        Prisma schema loaded from prisma\schema.prisma.
+        Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-broad-voice-a9g58cp8-pooler.gwc.azure.neon.tech"
+
+        1 migration found in prisma/migrations
+
+        Database schema is up to date!
+
+     3. sing --to-config-datasource (Prisma v7) or --to-schema-datasource (Prisma 6)
+
+     npx prisma migrate diff \ --from-schema prisma/schema.prisma \ --to-config-datasource \ --script > down.sql
+
+     result:
+     Loaded Prisma config from prisma.config.ts.
+    ┌─────────────────────────────────────────────────────────┐
+    │  Update available 7.2.0 -> 7.4.1                        │
+    │  Run the following to update                            │
+    │    npm i --save-dev prisma@latest                       │
+    │    npm i @prisma/client@latest                          │
+    └─────────────────────────────────────────────────────────┘
+
+     4. Generate and apply the up migration with a name of add_profile:
+     npx prisma migrate dev --name add_order_status_delete_orderItem_cascade
+
+     5. npx prisma migrate diff \ --from-schema prisma/schema.prisma \ --to-config-datasource \ --script > down.sql
+     npx prisma migrate dev --name make_payment_require_as_default_orders_satatus
+     32:00
 
 
-       ---------
+
+
+
 
     Notes: ----------------------------------------------------------------------------------------
 

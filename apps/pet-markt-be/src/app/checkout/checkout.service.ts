@@ -21,6 +21,8 @@
              totalAmount: createCheckoutDto.totalAmount,
          })
 
+         console.log('Order created for stripe checkout', order.id)
+
          const session = await stripe.checkout.sessions.create({
              line_items: createCheckoutDto.items.map(item => ({
                  price_data: {
@@ -33,10 +35,8 @@
                  quantity: item.quantity,
              })),
              mode: 'payment',
-            //  success_url: `http://localhost:4200/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-            //  cancel_url: `http://localhost:4200/checkout/cancel`,
              success_url: `${process.env.FRONTEND_URL}/checkout/success?orderId=${order.id}`,
-             cancel_url: `${process.env.FRONTEND_URL}/checkout/cancel`,
+             cancel_url: `${process.env.FRONTEND_URL}/checkout/cancel?orderId=${order.id}`,
              metadata: {
                  orderId: order.id,
              },

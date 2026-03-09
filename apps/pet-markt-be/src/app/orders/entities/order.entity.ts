@@ -1,7 +1,5 @@
- import { ObjectType, Field, Float, ID} from '@nestjs/graphql'
+ import { ObjectType, Field, Float, ID, registerEnumType} from '@nestjs/graphql'
  import { OrderItem } from './order-item.entity'
-
- //import { PrismaClient } from "@generated/prisma/client";
  import { OrderStatus } from "../../../generated/client";
 
  @ObjectType()
@@ -27,3 +25,8 @@
      @Field(() => Date, { description: 'Order update date' })
      updatedAt!: Date
  }
+
+ registerEnumType(OrderStatus, {
+     name: 'OrderStatus',
+     description: 'Status of the order',
+ })
