@@ -7,13 +7,18 @@
  import { ProductsModule } from './products/products.module'
  import { CheckoutModule } from './checkout/checkout.module'
  import { OrdersModule } from './orders/orders.module'
+ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 
  @Module({
      imports: [
          GraphQLModule.forRoot<ApolloDriverConfig>({
              driver: ApolloDriver,
              autoSchemaFile: join(process.cwd(), 'apps/pet-markt-be/dist/schema.gql'),
-             useGlobalPrefix: true
+             useGlobalPrefix: true,
+             playground: false,
+             plugins: [
+                 ApolloServerPluginLandingPageLocalDefault({})
+             ],
          }),
          ProductsModule,
          CheckoutModule,

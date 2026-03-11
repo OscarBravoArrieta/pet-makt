@@ -297,7 +297,9 @@ https://www.youtube.com/watch?v=DSDfH9K6-q0&t=172s
 
      5. npx prisma migrate diff \ --from-schema prisma/schema.prisma \ --to-config-datasource \ --script > down.sql
      npx prisma migrate dev --name make_payment_require_as_default_orders_satatus
-     32:00
+
+     4 Implementing the home page (46:00)
+     50:00
 
 
 

@@ -3,7 +3,8 @@
  import { Product } from '@client'
  import { Apollo, gql } from 'apollo-angular'
  import { inject } from '@angular/core'
- import { tap, map, catchError, EMPTY } from 'rxjs'
+ import { tap, map, catchError, EMPTY, switchMap, pipe } from 'rxjs'
+import { rxMethod } from '@ngrx/signals/rxjs-interop'
 
  const GET_PRODUCTS = gql`
      query GetProducts {
@@ -30,6 +31,18 @@
      }
  }
  `
+ const GET_FEATURED_PRODUCTS = gql`
+    query GetFeaturedProducts($featured: Boolean) {
+        products {
+            id
+            name
+            description
+            image
+            stripePriceId
+            isFeatures
+        }
+}
+  `
 
  export interface ProductState {
      products: Product[]
@@ -60,6 +73,18 @@
                  error: (error) => patchState(store, { error: error.message, loading: false })
              })).subscribe()
          },
+         getFeaturedProducts: rxMethod<boolean>(
+             pipe(
+                switchMap((featured) => apollo.query<{ products: Product[] }>({
+                    query: GET_FEATURED_PRODUCTS,
+                    variables: { featured }
+                })),
+                 tap({
+                     next: ({data}) => patchState(store, { products: (data?.products as Product[]) || [], loading: false, error: null }),
+                     error: (error) => patchState(store, { error: error.message, loading: false })
+                 })
+             )
+         ),
 
          searchProducts(term: string){
              patchState(store, { loading: true, error: null })
