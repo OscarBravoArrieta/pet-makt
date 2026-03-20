@@ -49,6 +49,15 @@
              return mod.CheckoutSuccess
          }
      },
+     {
+        path: 'auth/login',
+         loadComponent: () => import('./auth/login/login').then((c) => c.Login)
+
+     },
+     {
+         path: 'auth/signup',
+         loadComponent: () => import('./auth/signup/signup').then((c) => c.Signup)
+     },
 
      {
          path: '**',

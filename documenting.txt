@@ -299,7 +299,32 @@ https://www.youtube.com/watch?v=DSDfH9K6-q0&t=172s
      npx prisma migrate dev --name make_payment_require_as_default_orders_satatus
 
      4 Implementing the home page (46:00)
-     50:00
+
+
+     5.Implementing firebase utilities (53:17)
+     npm install @angular/fire @ngx-env/builder --legacy-peer-deps
+
+     a. configurate in pet-mark-web/.env file the variales of the firebase configuration
+     b. in the file project.json update the line: "executor": "@angular/build:application",
+        by "executor": "@ngx-env/builder:application"
+     c. in the project.json, after "styles":
+         "scripts": [],
+             "ngxEnv": {
+                 "prefix": "NG_APP"
+             },
+
+     d. Generate two components in D:\projects\nx\pet-makt\apps\pet-markt-web\src\app> (59:00)
+        nx generate component auth/login/login
+        √ Which generator would you like to use? · @nx/angular:component
+
+        nx generate component auth/signup/signup
+        √ Which generator would you like to use? · @nx/angular:component
+
+     e. Generate a new service
+        nx generate service auth/authService
+        √ Which generator would you like to use? · @schematics/angular:service
+
+1:13
 
 
 

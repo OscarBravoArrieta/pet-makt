@@ -7,7 +7,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
+      "executor": "@ngx-env/builder:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/pet-markt-web",
@@ -21,6 +21,10 @@
           }
         ],
         "styles": ["apps/pet-markt-web/src/styles.scss"],
+        "scripts": [],
+        "ngxEnv": {
+            "prefix": "NG_APP"
+        },
         "server": "apps/pet-markt-web/src/main.server.ts",
         "ssr": {
           "entry": "apps/pet-markt-web/src/server.ts"
