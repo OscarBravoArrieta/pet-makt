@@ -2,6 +2,11 @@
 
  export const serverRoutes: ServerRoute[] = [
     {
+         path: 'orders',
+         renderMode: RenderMode.Client
+
+    },
+    {
          path: '**',
          //renderMode: RenderMode.Prerender,
          renderMode: RenderMode.Server,

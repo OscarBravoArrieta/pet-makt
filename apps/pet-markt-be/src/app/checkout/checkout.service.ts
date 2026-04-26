@@ -2,6 +2,7 @@
  import { CreateCheckoutDto } from './dto/create-checkout.dto'
  import { OrdersService } from '../orders/orders.service'
  import { Stripe } from 'stripe'
+ import { FirebaseService } from '../firebase/firebas.service'
 
  const stripeSecret = process.env.STRIPE_SECRET_KEY || ''
 
@@ -14,11 +15,18 @@
  @Injectable()
  export class CheckoutService {
 
-     constructor(private orderService: OrdersService) {}
-     async create(createCheckoutDto: CreateCheckoutDto) {
+     constructor(private orderService: OrdersService, private firebaseService: FirebaseService) {}
+     async create(createCheckoutDto: CreateCheckoutDto, token: string) {
+         let userId: string | undefined = undefined
+         if (token) {
+             userId = await this.firebaseService.verifyToken(token)
+         }
+
+         console.log({token, userId})
          const order = await  this.orderService.create({
              items: createCheckoutDto.items,
              totalAmount: createCheckoutDto.totalAmount,
+             userId
          })
 
          console.log('Order created for stripe checkout', order.id)

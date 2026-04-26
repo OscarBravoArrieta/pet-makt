@@ -40,6 +40,9 @@
   <a routerLink="/auth/signup" class="hover:underline">Sign Up</a>
 </li>
 } @else {
+ <li class="relative">
+    <a routerLink = "/orders">My Orders</a>
+ </li>
 <li class="relative">
   <button
     (click)="toggleDropdown()"
@@ -74,13 +77,23 @@
 
          class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 text-gray-700"
          role="menu"
+
      }
   >
+   <button
+         class="relative"
+         role="menuitem"
+         (click)="toggleDropdown"
+         class = "block w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+         <a routerLink = "/orders" class="block w-full h-full text-left text-sm hover:bg-gray-100">Orders</a>
+     </button>
     <button
-      (click)="logout()"
-      class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-      role="menuitem"
-    >
+
+        (click)="logout()"
+        class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+        role="menuitem"
+
+     >
       Logout
     </button>
   </div>

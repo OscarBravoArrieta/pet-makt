@@ -324,7 +324,30 @@ https://www.youtube.com/watch?v=DSDfH9K6-q0&t=172s
         nx generate service auth/authService
         √ Which generator would you like to use? · @schematics/angular:service
 
-1:13
+     f. npm install firebase-admin --legacy-peer-deps
+
+     g. \projects\nx\pet-makt\apps\pet-markt-be> nx g m firebase --dry-run
+
+     h. projects\nx\pet-makt\apps\pet-markt-be\src\app> create a folder firebase and a file firebase.module.ts
+
+
+     PS D:\projects\nx\pet-makt\apps\pet-markt-web\src\app> nx g c orders/orders
+     √ Which generator would you like to use? · @nx/angular:component
+     NX  Generating @nx/angular:component
+
+     PS D:\projects\nx\pet-makt\apps\pet-markt-web\src\app> nx g c orders/orders
+     √ Which generator would you like to use? · @nx/angular:component
+     NX  Generating @nx/angular:component
+
+    1:53:11 -> npm instal js-cookie --legacy-peer-deps
+    npm install --save-dev @types/js-cookie --legacy-peer-deps
+    PS D:\projects\nx\pet-makt\apps\pet-markt-web\src\app\auth>  nx generate guard auth
+
+    √ Which generator would you like to use? · @schematics/angular:guard
+    NX  Generating @schematics/angular:guard
+    √ Which type of guard would you like to create? · CanActivate
+
+2:18:50
 
 
 

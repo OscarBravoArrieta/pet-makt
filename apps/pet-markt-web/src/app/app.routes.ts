@@ -1,4 +1,6 @@
  import { Route } from '@angular/router'
+ import { authGuard } from './auth/auth-guard'
+
 
  export const appRoutes: Route[] = [
      {
@@ -27,7 +29,6 @@
              return mod.Cart
          }
      },
-
      {
          path: 'checkout',
          loadComponent: async () => {
@@ -56,8 +57,21 @@
      },
      {
          path: 'auth/signup',
-         loadComponent: () => import('./auth/signup/signup').then((c) => c.Signup)
+         loadComponent: () => import('./auth/signup/signup').then((c) => c.Signup),
+         canActivate: [authGuard]
      },
+     {
+
+         path: 'orders',
+         loadComponent: () =>
+         import('./orders/orders').then((c) => c.Orders)
+     },
+     {
+         path: 'orders/:id',
+         loadComponent: () =>
+         import('./order/order').then((c) => c.Order)
+     },
+
 
      {
          path: '**',
